@@ -2,8 +2,18 @@ const User = require("../models/users")
 const bcrypt = require("bcrypt")
 
 module.exports = {
-    index(req, res){
-        res.json({message:"Hello world"})
+    async index(req, res){
+        const users = await User.findAll({raw: true, order: [
+            ['id', 'DESC']
+        ]})
+
+        res.json(users)
+    },
+
+    async fundUser(req, res){
+        const {id} = req.params;
+        const user = await User.findOne({where: {id}})
+        res.json(user)
     },
 
     async create(req, res){

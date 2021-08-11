@@ -1,8 +1,9 @@
 const express = require("express")
-const routes = express.Router()
+const router = express.Router()
 const Usuario = require("./controllers/UsuariosController")
 
-routes.get("/", Usuario.index)
-routes.post("/api/usuarios", Usuario.create)
+router.get("/api/usuarios", Usuario.index)
+router.get("/api/usuarios/:id", Usuario.fundUser)
+router.post("/api/usuarios", Usuario.create)
 
-module.exports = routes
+module.exports = router
