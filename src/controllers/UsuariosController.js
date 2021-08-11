@@ -3,17 +3,30 @@ const bcrypt = require("bcrypt")
 
 module.exports = {
     async index(req, res){
-        const users = await User.findAll({raw: true, order: [
-            ['id', 'DESC']
-        ]})
-
-        return res.status(200).json(users)
+        try {
+            const users = await User.findAll({raw: true, order: [
+                ['id', 'DESC']
+            ]})
+    
+            return res.status(200).json(users)
+        } catch (error) {
+            return res.status(500).json({message: "Operação Indisponível"})
+        }
     },
 
     async findUser(req, res){
-        const {id} = req.params;
-        const user = await User.findOne({where: {id}})
-        return res.status(200).json(user)
+        try {
+            const {id} = req.params;
+            const user = await User.findOne({where: {id}})  
+            
+            if(user){
+                return res.status(200).json(user)
+            }else{
+                return res.status(401).json({message: "User don't exists"})
+            }
+        } catch (error) {
+            return res.status(500).json({message: "Operação Indisponível"}) 
+        }
     },
 
     async create(req, res){
@@ -22,25 +35,33 @@ module.exports = {
 
         let user = await User.findOne({where: {email_usuario}})
         
-        if(!user){  
-            var passwordHash = bcrypt.hashSync(senha_usuario, 10) 
-            data = {nome_usuario, email_usuario, tipo_usuario, senha_usuario: passwordHash}
-            user = await User.create(data)
-            
-            return res.status(200).json(user)
-        }else{
-            return res.status(500).json({message: "user already exists"})
+        try {
+            if(!user){  
+                var passwordHash = bcrypt.hashSync(senha_usuario, 10) 
+                data = {nome_usuario, email_usuario, tipo_usuario, senha_usuario: passwordHash}
+                user = await User.create(data)
+                
+                return res.status(200).json(user)
+            }else{
+                return res.status(401).json({message: "user don't exists"})
+            }
+        } catch (error) {
+            return res.status(500).json({message: "Operação inválida"})
         }
     },
 
     async delete(req, res){
         const {id} = req.params;
-        const user = await User.destroy({where: {id}})
+        try {
+            const user = await User.destroy({where: {id}})
 
-        if(user){
-            return res.status(200).json({message: "User excluído"})
-        }else{
-            return res.status(403).json({message: "User don't find"})
+            if(user){
+                return res.status(200).json({message: "User excluído"})
+            }else{
+                return res.status(403).json({message: "User don't find"})
+            }
+        } catch (error) {
+            return res.status(500).json({message: "Operaçaão Inválida"}) 
         }
     },
 
