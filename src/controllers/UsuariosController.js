@@ -7,13 +7,13 @@ module.exports = {
             ['id', 'DESC']
         ]})
 
-        res.json(users)
+        return res.status(200).json(users)
     },
 
-    async fundUser(req, res){
+    async findUser(req, res){
         const {id} = req.params;
         const user = await User.findOne({where: {id}})
-        res.json(user)
+        return res.status(200).json(user)
     },
 
     async create(req, res){
@@ -24,13 +24,23 @@ module.exports = {
         
         if(!user){  
             var passwordHash = bcrypt.hashSync(senha_usuario, 10) 
-            console.log(passwordHash)
             data = {nome_usuario, email_usuario, tipo_usuario, senha_usuario: passwordHash}
             user = await User.create(data)
             
             return res.status(200).json(user)
         }else{
             return res.status(500).json({message: "user already exists"})
+        }
+    },
+
+    async delete(req, res){
+        const {id} = req.params;
+        const user = await User.destroy({where: {id}})
+
+        if(user){
+            return res.status(200).json({message: "User excluído"})
+        }else{
+            return res.status(403).json({message: "User don't find"})
         }
     }
 }
