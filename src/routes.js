@@ -6,5 +6,6 @@ router.get("/api/usuarios", Usuario.index)
 router.get("/api/usuarios/:id", Usuario.findUser)
 router.post("/api/usuarios", Usuario.create)
 router.delete("/api/usuarios/:id", Usuario.delete)
+router.put("/api/usuarios/:id", Usuario.update)
 
 module.exports = router
