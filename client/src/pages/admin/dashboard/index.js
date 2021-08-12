@@ -94,8 +94,8 @@ export default function Dashboard() {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <MenuAdmin />
+    
+      <MenuAdmin title={"DASHBOARD"}/>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>

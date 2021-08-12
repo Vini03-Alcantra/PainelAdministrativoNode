@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }))
 
-export default function MenuAdmin(){
+export default function MenuAdmin({title}){
     const classes = useStyles();
 
     const [open, setOpen] = React.useState(true);
@@ -120,7 +120,7 @@ export default function MenuAdmin(){
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+            {title}
           </Typography>
           
         </Toolbar>
