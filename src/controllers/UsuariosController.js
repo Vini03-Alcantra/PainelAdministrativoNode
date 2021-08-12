@@ -69,7 +69,7 @@ module.exports = {
         const {id} = req.params
         const {nome_usuario, email_usuario, tipo_usuario, senha_usuario} = req.body;
         const data = {nome_usuario, email_usuario, tipo_usuario, senha_usuario}
-        const user = await User.update({data}, {where: {id}});
+        const user = await User.update({nome_usuario, email_usuario, tipo_usuario, senha_usuario}, {where: {id}});
         
         if (user) {
             return res.status(200).json({message: "Atualizado com sucesso"})
