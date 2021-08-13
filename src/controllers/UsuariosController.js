@@ -1,6 +1,7 @@
 const User = require("../models/users")
 const bcrypt = require("bcrypt")
-
+const jwt = require("jsonwebtoken")
+const secret = "32f0fe2e4ed3f05c90da1bf9beeebd798bcba4142db5ad127580a1be8ae37af2"
 module.exports = {
     async index(req, res){
         try {
@@ -74,6 +75,27 @@ module.exports = {
             return res.status(200).json({message: "Atualizado com sucesso"})
         } else {
             return res.status(403).json({message: "User don't find"})
+        }
+    },
+
+    async login(req, res){
+        const {email, senha} = req.body;
+        console.log("Chegou aqui" + email + senha)
+        try {
+            const user = await User.findOne({where: {email_usuario: email, tipo_usuario: 1}})
+            console.log(user)
+            if(user){
+                const payload = {email}
+                const token = jwt.sign(payload, secret, {
+                    expiresIn: '24h'
+                })
+                res.cookie('token', token, {httpOnly: true});
+                res.status(200).json({status:1, auth: true, token: token, id_cliente: user.id, user_name:user.nome_usuario})
+            }else{
+                return res.status(403).json({status:2, message: "Email ou senha não conferem"})
+            }
+        } catch (error) {
+            return res.status(500).json({message: "Operação inválida"})
         }
     }
 }

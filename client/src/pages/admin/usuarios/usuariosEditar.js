@@ -134,7 +134,6 @@ export default function UsuarioCadastrar() {
         console.log(response)
         if(response.status === 200){
           window.location.href = '/admin/usuarios'
-        //   console.log("Deu certo")
         }else{
           alert("Erro ao cadastrar o usuário")
         }

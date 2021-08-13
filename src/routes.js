@@ -8,6 +8,7 @@ router.get("/api/usuarios/:id", Usuario.findUser)
 router.post("/api/usuarios", Usuario.create)
 router.delete("/api/usuarios/:id", Usuario.delete)
 router.put("/api/usuarios/:id", Usuario.update)
+router.post("/api/usuarios/login", Usuario.login)
 
 router.get("/api/produtos", Produto.index)
 router.get("/api/produtos/:id", Produto.findUser)
