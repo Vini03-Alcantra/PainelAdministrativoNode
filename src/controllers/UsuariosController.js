@@ -43,7 +43,7 @@ module.exports = {
                 
                 return res.status(200).json(user)
             }else{
-                return res.status(401).json({message: "user don't exists"})
+                return res.status(401).json({message: "user already exists"})
             }
         } catch (error) {
             return res.status(500).json({message: "Operação inválida"})
