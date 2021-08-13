@@ -154,7 +154,7 @@ export default function UsuariosListagem() {
                                 <TableCell align="center">{new Date(row.createdAt).toLocaleString('pt-br')}</TableCell>
                                   <Table align="right">
                                     <ButtonGroup aria-label="outlined primary button group">
-                                      <Button color="primary">Atualizar</Button>
+                                      <Button color="primary" href={`/admin/usuarios/editar/${row.id}`}>Atualizar</Button>
                                       <Button color="secondary" onClick={() => handleDelete(row.id)} >Excluir</Button>
                                     </ButtonGroup>  
                                 </Table> 
