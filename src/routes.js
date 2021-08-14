@@ -9,7 +9,7 @@ router.post("/api/usuarios", Usuario.create)
 router.delete("/api/usuarios/:id", Usuario.delete)
 router.put("/api/usuarios/:id", Usuario.update)
 router.post("/api/usuarios/login", Usuario.login)
-
+router.post("/api/usuarios/checkToken", Usuario.checkToken)
 router.get("/api/produtos", Produto.index)
 router.get("/api/produtos/:id", Produto.findUser)
 router.post("/api/produtos", Produto.create)

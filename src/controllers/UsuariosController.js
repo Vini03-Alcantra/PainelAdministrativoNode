@@ -100,5 +100,22 @@ module.exports = {
         } catch (error) {
             return res.status(500).json({message: "Operação inválida"})
         }
+    },
+
+    async checkToken(req, res){
+        const token = req.body.token || req.query.token || req.cookies.token || req.headers['x-access-token'];
+        req.token = token;
+        if(!token){
+            res.json({status:401, msg:"Não autorizado: Token inexistente"})
+        }else{
+            jwt.verify(token, secret, (err, decoded)=> {
+                if(err){
+                    res.json({stauts: 401, msg: "Não autorizado: Token inválido"})
+                }else{
+                    req.email = decoded.email;
+                    res.json({status: 200})
+                }
+            })
+        }
     }
 }
