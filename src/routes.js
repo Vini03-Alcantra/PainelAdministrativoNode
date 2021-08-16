@@ -10,6 +10,7 @@ router.delete("/api/usuarios/:id", Usuario.delete)
 router.put("/api/usuarios/:id", Usuario.update)
 router.post("/api/usuarios/login", Usuario.login)
 router.get("/api/token/usuarios/checkToken", Usuario.checkToken)
+router.get("/api/token/usuarios/destroyToken", Usuario.destroyToken)
 
 router.get("/api/produtos", Produto.index)
 router.get("/api/produtos/:id", Produto.findProduto)

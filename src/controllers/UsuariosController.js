@@ -116,5 +116,15 @@ module.exports = {
                 }
             })
         }
+    },
+
+    async destroyToken(req, res){
+        const token = req.headers.token;
+        if(token){
+            res.cookie('token', null, {httpOnly: true})
+        }else{
+            res.status(401).send("Logout não autorizado")
+        }
+        res.send("Sessão finalizado com sucesso")
     }
 }
