@@ -83,7 +83,7 @@ module.exports = {
     async login(req, res){
         const {email, senha} = req.body;
         try {
-            const user = await User.findOne({where: {email_usuario: email, tipo_usuario: 1}})
+            const user = await User.findOne({where: {email_usuario: email}})
             if(user){
                 if(await bcrypt.compare(senha, user.senha_usuario)){
                     const payload = {email}
@@ -91,7 +91,7 @@ module.exports = {
                         expiresIn: '24h'
                     })
                     res.cookie('token', token, {httpOnly: true});
-                    res.status(200).json({status:1, auth: true, token: token, id_cliente: user.id, user_name:user.nome_usuario})
+                    res.status(200).json({status:1, auth: true, token: token, id_cliente: user.id, user_name:user.nome_usuario, user_type: user.tipo_usuario})
                 }else{
                     return res.status(403).json({status:2, message: "Senha errada"})
                 }    

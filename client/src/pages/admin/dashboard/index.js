@@ -6,6 +6,11 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import MenuAdmin from '../../../components/menu-admin';
 import Footer from "../../../components/footer-admin";
+import {getTipoUsuario} from "../../../services/auth"
+
+import DashFuncionario from './funcionario'
+import DashGerente from './gerente'
+import DashAdmin from "./admin"
 
 const drawerWidth = 240;
 
@@ -88,6 +93,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function getDashboard(){
+  if(getTipoUsuario() === "1"){
+    return <DashAdmin />
+  }else if(getTipoUsuario() === "2"){
+    return <DashGerente />
+  }else{
+    return <DashFuncionario/>
+  }
+}
+
 export default function Dashboard() {
   const classes = useStyles();
   
@@ -100,7 +115,7 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            
+            {getDashboard()}   
           </Grid>
           <Box pt={4}>
             <Footer />

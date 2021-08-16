@@ -50,7 +50,7 @@ async function confirmSair(){
     const response = await api.get("/api/token/usuarios/destroyToken", {headers: {token:getToken()}}) 
     if(response.status === 200){
       logout()
-      window.location.href="/login"
+      window.location.href="/admin/login"
     }else{
       alert("Não foi possível fazer o logout")
     }
