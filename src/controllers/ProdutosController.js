@@ -15,7 +15,7 @@ module.exports = {
         }
     },
 
-    async findUser(req, res){
+    async findProduto(req, res){
         try {
             const {id} = req.params;
             const produto = await Produto.findOne({where: {id}})  

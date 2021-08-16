@@ -6,6 +6,8 @@ export const USER_TYPE = '&user-type';
 export const login = token => {localStorage.setItem(TOKEN_KEY, token)};
 export const logout = () => {localStorage.clear()};
 
+export const getToken = () => localStorage.getItem(TOKEN_KEY)
+
 export const setIdUsuario = id => {localStorage.setItem(ID_USUARIO, id)};
 export const getIdUsuario = () => {localStorage.getItem(ID_USUARIO)};
 

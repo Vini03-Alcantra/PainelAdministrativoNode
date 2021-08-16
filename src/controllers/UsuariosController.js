@@ -17,6 +17,7 @@ module.exports = {
     },
 
     async findUser(req, res){
+        console.log("Chegou no finduser")
         try {
             const {id} = req.params;
             const user = await User.findOne({where: {id}})  
@@ -104,16 +105,14 @@ module.exports = {
 
     async checkToken(req, res){
         const token = req.body.token || req.query.token || req.cookies.token || req.headers['x-access-token'];
-        req.token = token;
         if(!token){
             res.json({status:401, msg:"Não autorizado: Token inexistente"})
         }else{
             jwt.verify(token, secret, (err, decoded)=> {
                 if(err){
-                    res.json({stauts: 401, msg: "Não autorizado: Token inválido"})
+                    res.json({status: 401, msg: "Não autorizado: Token inválido"})
                 }else{
-                    req.email = decoded.email;
-                    res.json({status: 200})
+                    res.json({status: 200, msg: "Token validado"})
                 }
             })
         }
