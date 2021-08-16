@@ -6,7 +6,6 @@ import {Route, Redirect} from "react-router-dom"
 export default function WAuth({component: Component, ...rest}){
     const [redirect, setRedirect] = useState(false)
     const [loading, setLoading] = useState(true)
-    console.log("Chegou aqui")
 
     useEffect(() => {
         async function verify(){

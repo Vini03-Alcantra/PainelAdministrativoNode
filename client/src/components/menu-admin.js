@@ -13,6 +13,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
+import { getNomeUsuario } from "../services/auth";
 
 const drawerWidth = 240;
 
@@ -122,7 +123,7 @@ export default function MenuAdmin({title}){
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             {title}
           </Typography>
-          
+          {getNomeUsuario()}
         </Toolbar>
       </AppBar>
         <Drawer
