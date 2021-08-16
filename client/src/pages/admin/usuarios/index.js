@@ -14,6 +14,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import api from '../../../services/api';
+import { getNomeTipo, getNomeTipoLabel } from '../../../functions/static_data';
 
 const drawerWidth = 240;
 
@@ -150,7 +151,7 @@ export default function UsuariosListagem() {
                               <TableRow key={row.id}>
                                 <TableCell component="th" scope="row">{row.nome_usuario}</TableCell>
                                 <TableCell align="center">{row.email_usuario}</TableCell>
-                                <TableCell align="center">{parseInt(row.tipo_usuario) === 1?<Chip label="Administrador" color="primary"/>:<Chip label="Funcionário" color="secondary"/>}</TableCell>
+                                <TableCell align="center"><Chip label={getNomeTipo(row.tipo_usuario)} color={getNomeTipoLabel(row.tipo_usuario)}/></TableCell>
                                 <TableCell align="center">{new Date(row.createdAt).toLocaleString('pt-br')}</TableCell>
                                   <Table align="right">
                                     <ButtonGroup aria-label="outlined primary button group">
