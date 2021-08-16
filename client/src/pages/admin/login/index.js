@@ -11,6 +11,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import api from "../../../services/api"
 import {setNomeUsuario, login, setIdUsuario, setTipoUsuario} from "../../../services/auth"
+import IconButton from '@material-ui/core/IconButton';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+
 
 function Copyright() {
   return (
@@ -49,7 +57,7 @@ export default function SignIn() {
   const classes = useStyles();
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
-
+    const [showPassword, setShowPassword] = useState(false)
     async function handleSubmit(){
         await api.post("/api/usuarios/login", {email, senha}).then(res => {
             if(res.status === 200){
@@ -92,7 +100,7 @@ export default function SignIn() {
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
-          <TextField
+          {/* <TextField
             variant="outlined"
             margin="normal"
             required
@@ -104,7 +112,28 @@ export default function SignIn() {
             autoComplete="current-password"
             value={senha}
             onChange={e => setSenha(e.target.value)}
-          />
+          /> */}
+          <FormControl variant="outlined" style={{width: '100%', marginTop:10}}>
+            <InputLabel htmlFor="campoSenha">Digite sua senha</InputLabel>
+            <OutlinedInput
+              id="campoSenha"
+              type={showPassword ? 'text' : 'password'}
+              value={senha}
+              onChange={e => setSenha(e.target.value)}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={e => setShowPassword(!showPassword)}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              labelWidth={120}
+            />
+        </FormControl>
           <Button
             fullWidth
             variant="contained"
