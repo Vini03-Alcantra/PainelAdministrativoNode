@@ -18,6 +18,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 function Copyright() {
@@ -58,6 +59,8 @@ export default function SignIn() {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [showPassword, setShowPassword] = useState(false)
+    const [loading, setLoading] = useState(false)
+
     async function handleSubmit(){
         await api.post("/api/usuarios/login", {email, senha}).then(res => {
             if(res.status === 200){
@@ -71,10 +74,19 @@ export default function SignIn() {
                 }else if(res.data.status){
                     alert("Atenção " +res.data.error)
                 }
+                setLoading(false)
             }else{
                 alert("Erro no servidor")
+                setLoading(false)
             }
         })
+    }
+    function loadSubmit(){
+      setLoading(true)
+      setTimeout(  
+        () => handleSubmit(),
+        2000
+      )
     }
 
   return (
@@ -139,9 +151,10 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={handleSubmit}
+            onClick={loadSubmit}
+            disabled={loading}
           >
-            Entrar
+            {loading?<CircularProgress/>:"ENTRAR"}
           </Button>
       </div>
       <Box mt={8}>
