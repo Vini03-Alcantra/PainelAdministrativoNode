@@ -26,8 +26,7 @@ export default function WAuth({component: Component, ...rest}){
                 console.log(err)
             }
         }
-        setTimeout(() => verify(),1000)
-        // verify()
+        verify()
     }, [])
 
     return (

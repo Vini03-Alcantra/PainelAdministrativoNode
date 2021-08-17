@@ -96,6 +96,13 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  btnSuccess:{
+    backgroundColor: "green",
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "#12b912"
+    }
+  },
 }));
 
 export default function UsuarioCadastrar() {
@@ -152,6 +159,8 @@ export default function UsuarioCadastrar() {
         <Container maxWidth="lg" className={classes.container}>
             <Grid container spacing={3}>
                 <Grid item sm={12}>
+                <Button style={{marginBottom:10}} variant="contained" href={`/admin/usuarios`}>Voltar</Button>
+                <Button style={{marginBottom:10}} variant="contained" color="primary" href={`/admin/usuarios/cadastrar`}>Cadastrar</Button>
                 <Paper className={classes.paper}>
                   <h2>Atualização de Usuário</h2>
                   <Grid container spacing={3}>
@@ -210,8 +219,8 @@ export default function UsuarioCadastrar() {
                     />
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                    <Button variant="contained" onClick={handleSubmit} color="primary">
-                      Primary
+                    <Button variant="contained" onClick={handleSubmit} className={classes.btnSuccess}>
+                      Salvar
                     </Button>
                     </Grid>
                     </Grid>        

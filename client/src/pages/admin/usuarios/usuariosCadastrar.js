@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
   },
   container: {
-    paddingTop: theme.spacing(4),
+    paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(4),
   },
   paper: {
@@ -91,6 +91,13 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl:{
     width: '100%'
+  },
+  btnSuccess:{
+    backgroundColor: "green",
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "#12b912"
+    }
   },
   fixedHeight: {
     height: 240,
@@ -137,6 +144,7 @@ export default function UsuarioCadastrar() {
         <Container maxWidth="lg" className={classes.container}>
             <Grid container spacing={3}>
                 <Grid item sm={12}>
+                <Button style={{marginBottom:10, marginRight: 5}} variant="contained" href={`/admin/usuarios`}>Voltar</Button>
                 <Paper className={classes.paper}>
                   <h2>Cadastro de Usuários</h2>
                   <Grid container spacing={3}>
@@ -196,8 +204,8 @@ export default function UsuarioCadastrar() {
                     />
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                    <Button variant="contained" onClick={handleSubmit} color="primary">
-                      Primary
+                    <Button variant="contained" onClick={handleSubmit} className={classes.btnSuccess}>
+                      Salvar
                     </Button>
                     </Grid>
                     </Grid>        
